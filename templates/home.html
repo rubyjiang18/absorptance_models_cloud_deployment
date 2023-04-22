@@ -13,9 +13,8 @@
 </head>
 
 <body>
+  <h1 class="title">Keyhole's Energy Absorptance Prediction</h1>
  <div class="login">
-	<h1>Keyhole's Laser Energy Absorptance</h1>
-
      <!-- Main Input For Receiving Query to our ML -->
     <form action="{{ url_for('predict')}}"method="post">
       <input type="text" name="interview_score3" placeholder="Keyhole Depth (µm)" required="required" /><br>
