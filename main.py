@@ -1,0 +1,42 @@
+import numpy as np
+from flask import Flask, request, jsonify, render_template, url_for
+import pickle
+
+
+app = Flask(__name__)
+model = pickle.load(open('rf_absorptance_model.pkl','rb'))
+
+
+@app.route('/')
+def home():
+    #return 'Hello World'
+    return render_template('home.html')
+
+@app.route('/predict',methods = ['POST'])
+def predict():
+    int_features = [float(x) for x in request.form.values()]
+    # organize features
+    depth, width_half, area = int_features[0], int_features[1], int_features[2]
+    aspect_ratio = depth/width_half if width_half != 0 else 0
+    int_features = [depth, width_half,aspect_ratio, area]
+
+    final_features = [np.array(int_features)]
+    prediction = model.predict(final_features)
+    print(prediction[0])
+    return render_template('home.html', prediction_text="Laser Energy Absorptance {}%".format(round(prediction[0],2)))
+
+@app.route('/predict_api',methods=['POST'])
+def predict_api():
+    '''
+    For direct API calls trought request
+    '''
+    data = request.get_json(force=True)
+    prediction = model.predict([np.array(list(data.values()))])
+
+    output = prediction[0]
+    return jsonify(output)
+
+
+
+if __name__ == '__main__':
+    app.run(port=5000, debug=True)
