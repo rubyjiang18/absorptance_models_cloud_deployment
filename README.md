@@ -1,4 +1,4 @@
-# Google-Cloud-Platform-Deployment
+# Azure-Cloud-Platform-Deployment
 
 Instructions to run the website locally
 1. Create a new environemnt named webapp `conda create --name webapp`
