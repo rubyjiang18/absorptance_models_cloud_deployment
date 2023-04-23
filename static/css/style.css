@@ -40,10 +40,6 @@ body {
 	height:400px;
 }
 
-.login { 
-	text-align: center;
-}
-
 .login h1 { color: #fff; text-shadow: 0 0 10px rgba(0,0,0,0.3); letter-spacing:1px; text-align:center; }
 
 input { 
