@@ -14,20 +14,46 @@
 
 <body>
   <h1 class="title">Keyhole's Energy Absorptance Prediction</h1>
- <div class="login">
+
+  <div class="left-section">
+    <p>Use the ConvNeXt-T Deep Learning Model:</p>
+    <!-- Main Input For Receiving Image to our ML -->
+    <form action="{{ url_for('dl_predict') }}"method="post" enctype="multipart/form-data">
+      <input type="file" name="image" accept=".tif">
+      <button type="submit" class="btn btn-primary btn-block btn-large">Upload and Predict</button>
+    </form>
+  <br>
+  <br>
+  <p>Image requirements:
+    <ul>
+      <li>Image format: a tiff image with the file name ends with "tif", for example, "test_image.tif"</li>
+      <li>Image size: around 350 x 350 pixels for optimal performance</li>
+      <li>Make sure the keyhole (vapor depression) is roughly at the center of your image</li>
+    </ul>
+    Here is an example image:
+    <!-- <img src="../images/test.png" alt="Image description" width="250" height="250"> -->
+    <embed src="../images/test.png" type="image/png" width="250" height="250">
+   </p>
+   
+  </div> 
+
+ <div class="right-section">
      <!-- Main Input For Receiving Query to our ML -->
-    <form action="{{ url_for('predict')}}"method="post">
+    <p>Use the Random Forest Model:</p>
+    <form action="{{ url_for('rf_predict')}}"method="post">
       <input type="text" name="interview_score3" placeholder="Keyhole Depth (µm)" required="required" /><br>
     	<input type="text" name="experience" placeholder="Keyhole Width at Half Depth (µm)" required="required" /><br>
       <input type="text" name="test_score" placeholder="Keyhole Area (µm&sup2)" required="required" /><br>
       <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
     </form>
-
    <br>
    <br>
-  
  </div>
+
+ <div class="prediction">
  {{prediction_text}}
+ </div>
+
 
 </body>
 </html>
