@@ -40,6 +40,10 @@ body {
 	height:400px;
 }
 
+.left-align {
+	text-align: left;
+}
+
 .prediction {
 	margin-top: 20px; 
 	margin-bottom: 20px; 

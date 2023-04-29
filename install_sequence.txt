@@ -1,0 +1,5 @@
+conda install pytorch::pytorch torchvision torchaudio -c pytorch
+conda install -c anaconda flask
+conda install -c conda-forge tifffile
+conda install scikit-learn=1.2.0
+conda install numpy=1.22
