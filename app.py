@@ -15,7 +15,7 @@ from torchvision.transforms import ToTensor
 app = Flask(__name__)
 
 # the random forest model
-rf_model = pickle.load(open('rf_absorptance_model.pkl','rb'))
+rf_model = pickle.load(open('rf_absorptance_model_simplified.pkl','rb'))
 # the convnext deep learning model
 dl_model  = convnext_tiny(weights=None)
 dl_model.classifier[2] = nn.Linear(768, 1)
@@ -39,22 +39,27 @@ def home():
 @app.route('/rf_predict',methods = ['POST'])
 def rf_predict():
     user_inputs = request.form.values()
-    validate_inputs(user_inputs)
+    features = [x for x in user_inputs]
+    user_inputs = validate_inputs(features)
     # organize features
-    int_features = [float(x) for x in user_inputs]
+    int_features = [float(x) for x in features]
     depth, width_half, area = int_features[0], int_features[1], int_features[2]
     aspect_ratio = depth/width_half if width_half != 0 else 0
-    int_features = [depth, width_half,aspect_ratio, area]
+    int_features = [depth, aspect_ratio, area]
 
     final_features = [np.array(int_features)]
     prediction = rf_model.predict(final_features)
 
     return render_template('home.html', prediction_text="RF model predicted absorptance: {}%".format(round(prediction[0],2)))
 
-def validate_inputs(inputs):
-    for x in inputs:
-        if not x.isdigit():
+def validate_inputs(lst):
+    '''
+    Validate the lst only contain numbers.
+    '''
+    for element in lst:
+        if not isinstance(element, (int, float)) and not (isinstance(element, str) and element.isdigit()):
             abort(400, 'Input must be numbers')
+
 
 def validate_image(image):
     # Check that the file extension is .tif
