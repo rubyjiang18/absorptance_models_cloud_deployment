@@ -6,8 +6,13 @@ __pycache__/
 # C extensions
 *.so
 
+# models
+dl_absorptance_weights
+.pkl
+
 # Distribution / packaging
 .Python
+.DS_Store
 build/
 develop-eggs/
 dist/
