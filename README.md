@@ -1,4 +1,6 @@
-# Azure-Cloud-Platform-Deployment
+# WebApp for Online Absorption Prediction 
+
+This web app has been deployed on AWS, check this url: xxx
 
 Instructions to run the website locally
 1. Create a new environemnt named webapp `conda create --name webapp`
