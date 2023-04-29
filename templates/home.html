@@ -13,10 +13,17 @@
 </head>
 
 <body>
-  <h1 class="title">Keyhole's Energy Absorptance Prediction</h1>
+  <h1 class="title">Keyhole Energy Absorptance Prediction</h1>
+
+  <div class="result"> 
+    {{prediction_text}}
+  </div>
+   
 
   <div class="left-section">
-    <p>Use the ConvNeXt-T Deep Learning Model:</p>
+    <span style="margin-bottom: 10px;">Use the ConvNeXt-T Deep Learning Model:</span>
+    <br>
+    <br>
     <!-- Main Input For Receiving Image to our ML -->
     <form action="{{ url_for('dl_predict') }}"method="post" enctype="multipart/form-data">
       <input type="file" name="image" accept=".tif">
@@ -24,22 +31,21 @@
     </form>
   <br>
   <br>
-  <p class="left-align">Image requirements:
-    <ul>
-      <li>Image format: a tiff image with the file name ends with "tif", for example, "test_image.tif"</li>
+  <p class="text-left-align">Image requirements:
+    <ul class="text-left-align">
+      <li>Image format: a tiff image with the file name ends with "tif", for example, "test.tif"</li>
       <li>Image size: around 350 x 350 pixels for optimal performance</li>
       <li>Make sure the keyhole (vapor depression) is roughly at the center of your image</li>
     </ul>
-    Here is an example image:
-    <!-- <img src="../images/test.png" alt="Image description" width="250" height="250"> -->
-    <embed src="../images/test.png" type="image/png" width="250" height="250">
    </p>
    
   </div> 
 
  <div class="right-section">
      <!-- Main Input For Receiving Query to our ML -->
-    <p>Use the Random Forest Model:</p>
+    <span style="margin-bottom: 10px;">Use the Random Forest Model:</span>
+    <br>
+    <br>
     <form action="{{ url_for('rf_predict')}}"method="post">
       <input type="text" name="interview_score3" placeholder="Keyhole Depth (µm)" required="required" /><br>
     	<input type="text" name="experience" placeholder="Keyhole Width at Half Depth (µm)" required="required" /><br>
@@ -48,12 +54,20 @@
     </form>
    <br>
    <br>
+   <p>Inputs:
+    <ul>
+      <li>Inputs have to be numbers</li>
+      <li>Keyhole aspect ratio will be calculated for you using the provided depth and width values, so you do not need to privide an aspect ratio
+    </ul>
+   </p>
+   
  </div>
 
- <div class="prediction">
- {{prediction_text}}
- </div>
-
-
+ <div class="footnote"> 
+  Both models were trained on absorptance data acquired on Ti-6Al-4V without a powder layer. <br>
+  To use the ConvNeXt-T fine tuned on powder data, checkout the model release part. <br>
+  We advise you to treat the model's predictions with caution when testing it on a different material.<br>
+</div>
+ 
 </body>
 </html>

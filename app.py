@@ -38,8 +38,10 @@ def home():
 
 @app.route('/rf_predict',methods = ['POST'])
 def rf_predict():
-    int_features = [float(x) for x in request.form.values()]
+    user_inputs = request.form.values()
+    validate_inputs(user_inputs)
     # organize features
+    int_features = [float(x) for x in user_inputs]
     depth, width_half, area = int_features[0], int_features[1], int_features[2]
     aspect_ratio = depth/width_half if width_half != 0 else 0
     int_features = [depth, width_half,aspect_ratio, area]
@@ -47,7 +49,12 @@ def rf_predict():
     final_features = [np.array(int_features)]
     prediction = rf_model.predict(final_features)
 
-    return render_template('home.html', prediction_text="Laser Energy Absorptance {}%".format(round(prediction[0],2)))
+    return render_template('home.html', prediction_text="RF model predicted absorptance: {}%".format(round(prediction[0],2)))
+
+def validate_inputs(inputs):
+    for x in inputs:
+        if not x.isdigit():
+            abort(400, 'Input must be numbers')
 
 def validate_image(image):
     # Check that the file extension is .tif
@@ -80,7 +87,7 @@ def dl_predict():
     output = dl_model(image) 
     output= float(output.squeeze(1).detach().numpy()[0])
     #
-    return render_template('home.html', prediction_text="Laser Energy Absorptance {}%".format(round(output,2)))
+    return render_template('home.html', prediction_text="DL model predicted absorptance: {}%".format(round(output,2)))
 
 # @app.route('/predict_api',methods=['POST'])
 # def predict_api():
