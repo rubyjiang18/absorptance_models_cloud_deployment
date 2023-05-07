@@ -1,4 +1,6 @@
-torchvision=0.15.0=py38_cpu
-flask=2.0.3
+torchaudio==2.0.0
+torchvision==0.15.0
+torch==2.0.0
+flask==2.0.3
 scikit-learn==1.2.0
-numpy=1.22.3
+numpy==1.22.3
