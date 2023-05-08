@@ -9,6 +9,8 @@ __pycache__/
 # models
 dl_absorptance_weights
 .pkl
+rf_absorptance_model_simplified.pkl
+keyhole_model_deployment.pem
 
 # Distribution / packaging
 .Python
