@@ -1,0 +1,7 @@
+version: "3.8"  # optional since v1.27.0
+services:
+  web:
+    build:
+      context: .
+    ports:
+      - "7004:8081"
