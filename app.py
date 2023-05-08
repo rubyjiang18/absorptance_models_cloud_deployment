@@ -1,15 +1,11 @@
 import numpy as np
 from flask import Flask, request, jsonify, render_template, url_for, abort
 import pickle
-import imghdr
 import torch
 import torch.nn as nn
 from torchvision.models import convnext_tiny
-from PIL import Image
-from PIL import Image
 
-from torchvision import transforms
-from torchvision.transforms import ToTensor
+from utils import validate_image, validate_inputs, preprocess_image, test_preprocess
 
 
 app = Flask(__name__)
@@ -23,12 +19,6 @@ checkpoint = torch.load("dl_absorptance_weights", map_location=torch.device('cpu
 dl_model.load_state_dict(checkpoint['model_state_dict'])
 device = 'cpu'
 dl_model.to(device)
-
-test_preprocess =  transforms.Compose([
-    transforms.Resize(256),
-    transforms.CenterCrop(224),
-    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
-])
 
 
 @app.route('/')
@@ -52,33 +42,6 @@ def rf_predict():
 
     return render_template('home.html', prediction_text="RF model predicted absorptance: {}%".format(round(prediction[0],2)))
 
-def validate_inputs(lst):
-    '''
-    Validate the lst only contain numbers.
-    '''
-    for element in lst:
-        if not isinstance(element, (int, float)) and not (isinstance(element, str) and element.isdigit()):
-            abort(400, 'Input must be numbers')
-
-
-def validate_image(image):
-    # Check that the file extension is .tif
-    if not image.filename.endswith('.tif'):
-        abort(400, 'File must be in .tif format')
-    # Check that the file is a valid TIFF image
-    if imghdr.what(image) != 'tiff':
-        abort(400, 'File is not a valid TIFF image')
-    # Check that the image is a gray scale image
-    image = Image.open(image)
-    channels = image.getbands()
-    if len(channels) != 1: 
-        abort(400, 'File has to a gray scale tif image')
-
-def preprocess_image(image):
-    image = np.array(Image.open(image))
-    image = torch.tensor(image,dtype=torch.float64).unsqueeze_(0)
-    image = image.repeat(3, 1, 1)
-    return image
 
 @app.route('/dl_predict',methods = ['POST'])
 def dl_predict():
