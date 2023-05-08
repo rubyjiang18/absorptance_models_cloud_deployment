@@ -34,7 +34,7 @@ def preprocess_image(image):
     image = Image.open(image)
     width, height = image.size
     image_array = np.array(image)
-    # if less than dimension 350x250, pad the image using mean
+    # if less than dimension 350, pad the image using mean
     dimension = 350
     if width < dimension or height < dimension :
         mean_value = np.mean(image_array)
