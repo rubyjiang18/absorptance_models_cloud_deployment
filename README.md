@@ -13,8 +13,7 @@ This web app has been deployed on AWS, check this url: http://3.80.140.107:8080/
 
 ### Instructions to run the website locally using Docker
 1. [Install](https://docs.docker.com/get-docker/) and Start docker on your machine, either the docker application on Mac/Windows.
-2. Follow the same procedure as above from 1 to 3
-3. Run Docker `docker-compose up`
+2. Run Docker `docker-compose up`
 Now you can check the web app running at * http://localhost:7004
 
 
