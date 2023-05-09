@@ -2,6 +2,8 @@
 
 This web app has been deployed on AWS, check this url: http://3.80.140.107:8080/
 
+This github repo has all you need to run the webapp except the two machine learning models as they are too big for github to store. Check the [official keyhole webpage](https://rubyjiang18.github.io/keyholeofficial/) to download the trained models, one for ConvNeXt-T deep learning model and another for the Random Forest model.\
+
 ## Instructions to run the website locally without Docker
 1. Create a new environemnt named webapp `conda create --name webapp`
 2. Activate this environment `conda activate webapp`
