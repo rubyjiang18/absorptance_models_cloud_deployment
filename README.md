@@ -2,7 +2,7 @@
 
 This web app has been deployed on AWS, check this url: http://3.80.140.107:8080/
 
-This github repo has all you need to run the webapp except the two machine learning models as they are too big for github to store. Check the [official keyhole webpage](https://rubyjiang18.github.io/keyholeofficial/) to download the trained models, one for ConvNeXt-T deep learning model and another for the Random Forest model.\
+This github repo has all you need to run the webapp except the two machine learning models as they are too big for github to store. Check the [official keyhole webpage](https://rubyjiang18.github.io/keyholeofficial/) to download the trained models, one for ConvNeXt-T deep learning model and another for the Random Forest model.
 
 ## Instructions to run the website locally without Docker
 1. Create a new environemnt named webapp `conda create --name webapp`
@@ -17,7 +17,7 @@ You can follow [this tutorial](https://www.twilio.com/blog/deploy-flask-python-a
 
 ## Instructions to run the website locally using Docker
 1. [Install](https://docs.docker.com/get-docker/) and Start docker on your machine, either the docker application on Mac/Windows.
-2. Run Docker `docker-compose up`\
+2. Run Docker `docker-compose up`<br/>
 Now you can check the web app running at http://localhost:7004
 ### To deploy this Docker app to AWS ECS
 I followed [this tutorial](https://cto.ai/blog/deploying-a-docker-application-to-aws-ecs/)
