@@ -1,6 +1,6 @@
 # WebApp for Online Absorption Prediction 
 
-This web app has been deployed on AWS, check this url: http://3.80.140.107:8080/
+This web app has been deployed on AWS, check this url: http://3.144.73.188:8080/
 
 This github repo has all you need to run the webapp except the two machine learning models as they are too big for github to store. Check the [official keyhole webpage](https://rubyjiang18.github.io/keyholeofficial/) to download the trained models, one for ConvNeXt-T deep learning model and another for the Random Forest model.
 
