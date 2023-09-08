@@ -28,6 +28,7 @@ def home():
 
 @app.route('/rf_predict',methods = ['POST'])
 def rf_predict():
+    # input features are in the order of depth (um), width_at_half_depth (um), area (um^2)
     user_inputs = request.form.values()
     features = [x for x in user_inputs]
     user_inputs = validate_inputs(features)
